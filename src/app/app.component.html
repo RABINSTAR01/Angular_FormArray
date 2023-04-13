@@ -1,0 +1,30 @@
+<form [formGroup]="reg" (ngSubmit)="formsubmit(reg)">
+    name: &nbsp;<input type="text" formControlName="name" />
+    <div *ngIf="reg.get('name')?.errors?.['required'] && reg.get('name')?.touched"> name is required</div>
+    <div *ngIf="reg.get('name')?.errors?.['minlength'] && reg.get('name')?.dirty"> name should be minumum four</div>
+    <br> <br>
+    mail: &nbsp;<input type="email" formControlName="mail" />
+    <div *ngIf="reg.get('mail')?.errors?.['required'] &&  reg.get('mail')?.touched">mail is required</div>
+    <div *ngIf="reg.get('mail')?.errors?.['required'] &&  reg.get('mail')?.invalid">mail is not valid</div>
+    <br>
+
+    <label>hobbies   :</label>      
+    <div formArrayName="hobby">
+        <div *ngFor="let super of hobbyget; let i =index ">
+            <br>
+          <input type="text"  [formControlName]="i" />
+          <button (click)="remove(i)">remove</button>
+        </div>
+        <br>
+    </div>
+   
+    
+    <div>
+        <button type="button" (click)="addHobby()">Add Hobby</button>
+    </div>   
+    <br>
+    <button type="submit">submit</button>
+    &nbsp; &nbsp;
+  
+
+</form>
